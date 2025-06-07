@@ -633,3 +633,52 @@ html, body {
 
 
 
+
+
+
+/* Actualités */
+.actus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.actus-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.actus-card:hover {
+    transform: translateY(-5px);
+}
+
+.actus-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.actus-card h3 {
+    margin: 1rem;
+    font-size: 1.4rem;
+    color: #222;
+}
+
+.actus-card .date {
+    margin: 0 1rem;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.actus-card p {
+    margin: 0 1rem 1rem;
+    font-size: 1rem;
+    color: #444;
+}
