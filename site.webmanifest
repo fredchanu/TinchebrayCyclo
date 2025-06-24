@@ -1,1 +1,27 @@
-{"name":"","short_name":"","icons":[{"src":"/assets/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/assets/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "Tinchebray Cyclo",
+  "short_name": "Cyclo",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FAF9F6",
+  "theme_color": "#FFD700",
+  "description": "Site officiel du club Tinchebray Cyclo : VTT, route et événements",
+  "icons": [
+    {
+      "src": "assets/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
