@@ -340,6 +340,43 @@ body.menu-open {
   line-height: 1.5;
   margin-bottom: 1.5rem;
 }
+@media (max-width: 768px) {
+  .event-card {
+    display: block;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .event-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .event-content {
+    padding: 1.2rem 1rem;
+  }
+
+  .event-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .event-description {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .event-content .cta {
+    margin-right: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+}
 
 /* ACTUALITÉS */
 
