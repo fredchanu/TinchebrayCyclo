@@ -1045,8 +1045,9 @@ form label {
  padding-top: 2rem;
 }
 .cta-center {
-  padding-top: 1.5rem;
+  padding-top: 1rem;
   text-align: center;
+  padding-bottom: 2rem;
 }
 /* MEDIA QUERIES */
 
