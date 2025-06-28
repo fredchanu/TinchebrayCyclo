@@ -54,3 +54,4 @@ document.querySelectorAll(".accordion").forEach(button => {
   });
 });
 
+document.getElementById("year").textContent = new Date().getFullYear();

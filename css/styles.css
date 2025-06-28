@@ -511,6 +511,11 @@ body.menu-open {
 .accordion.active .arrow {
   transform: translateY(-50%) rotate(135deg);
 }
+.faq-button {
+  text-align: center;
+  margin-top: 2rem;
+}
+
 
 
 /* FOOTER */
