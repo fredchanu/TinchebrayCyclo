@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Merci — Tinchebray Cyclo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Merci pour votre message. Le club Tinchebray Cyclo revient vers vous rapidement.">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    :root{
+      --brand-yellow:#FFD700;       
+      --bg:#49594C;                  
+      --card:#ffffff;
+      --text:#0b0b0b;
+      --muted:#5c5f66;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:linear-gradient(180deg, #0f1115 0%, #151923 100%);
+      color:#fff;
+      background:linear-gradient(180deg, var(--brand-yellow) 0%, #000000 100%);
+    }
+
+    /* Bandeau diagonal façon hero */
+    .hero{
+      position:relative;
+      padding:72px 16px 120px;
+      text-align:center;
+
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:-60px; height:120px;
+    }
+    .logo{
+      display:inline-flex; gap:.4rem; align-items:baseline; letter-spacing:.5px;
+      font-weight:800; font-size:1rem; color:var(--text); text-transform:uppercase; opacity:.9;
+    }
+    .logo span{color:var(--brand-yellow)}
+    .hero h1{
+      margin:18px auto 8px; max-width:900px;
+      font-size:clamp(28px, 3.4vw, 44px); line-height:1.05;
+    }
+    .hero p{
+      margin:0 auto; max-width:720px; color:#d9d9d9; font-size:clamp(15px,1.5vw,18px);
+    }
+
+    /* Carte centrale */
+    .wrap{max-width:960px; margin:-64px auto 48px; padding:0 16px; position:relative; z-index:1}
+    .card{
+      background:var(--card); color:var(--text);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:28px 24px;
+      display:grid; gap:14px; text-align:center;
+      animation:pop .5s ease-out both;
+    }
+    @keyframes pop{from{transform:translateY(10px); opacity:0} to{transform:translateY(0); opacity:1}}
+
+    .badge{
+      display:inline-block; padding:.28rem .6rem; border-radius:999px;
+      background:rgba(255,212,59,.18); color:#3a3a3a; font-weight:700; font-size:.8rem;
+      border:1px solid rgba(255,212,59,.4);
+    }
+    .card h2{margin:.2rem 0; font-size:clamp(22px,2.4vw,28px)}
+    .card p{margin:0; color:var(--muted)}
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:6px;
+    }
+    .btn{
+      appearance:none; border:0; cursor:pointer; text-decoration:none;
+      padding:.8rem 1.1rem; border-radius:12px; font-weight:800; letter-spacing:.2px;
+      background:#f3f4f6; color:#0b0b0b; transition:.2s transform, .2s box-shadow, .2s background;
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .btn--primary{ background:var(--brand-yellow) }
+    .btn--ghost{ background:transparent; border:1.5px solid #e6e7ea }
+    .list{
+      display:grid; gap:8px; justify-content:center; margin:2px 0 0; padding:0; list-style:none; color:#6b6f76; font-size:.95rem;
+    }
+    .list li{display:flex; gap:.5rem; align-items:center; justify-content:center}
+    .dot{width:8px; height:8px; border-radius:50%; background:var(--brand-yellow)}
+    footer{color:#9aa0a6; text-align:center; padding:24px 16px 40px; font-size:.9rem}
+    footer a{color:#cfd3d7; text-decoration:none}
+    @media (prefers-reduced-motion: reduce){
+      .card{animation:none}
+      .btn:hover{transform:none; box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" role="banner">
+    <div class="logo" aria-label="Tinchebray Cyclo">
+      Tinchebray <span>Cyclo</span>
+    </div>
+    <h1>Merci pour votre message 🙌</h1>
+    <p>Votre demande a bien été envoyée. Un membre du club vous répondra au plus vite.</p>
+  </header>
+
+  <main class="wrap" role="main">
+    <section class="card" aria-labelledby="merci-title">
+      <span class="badge">Confirmation d’envoi</span>
+      <h2 id="merci-title">On revient vers vous rapidement</h2>
+      <p>En attendant, vous pouvez consulter nos événements, nos actualités, ou nous suivre sur Facebook.</p>
+
+      <nav class="cta" aria-label="Navigation rapide">
+        <a class="btn btn--primary" href="/">← Retour à l’accueil</a>
+        <a class="btn" href="/evenements.html">Voir les événements</a>
+        <a class="btn" href="/actualites.html">Actualités</a>
+        <a class="btn btn--ghost" href="/contact.html">Contacter à nouveau</a>
+      </nav>
+
+      <ul class="list" aria-label="Infos utiles">
+        <li><span class="dot" aria-hidden="true"></span>Sorties route, VTT & gravel</li>
+        <li><span class="dot" aria-hidden="true"></span>Ambiance conviviale depuis 1979</li>
+        <li><span class="dot" aria-hidden="true"></span>Réponse sous peu (selon affluence)</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    © Tinchebray Cyclo — Site réalisé par <a href="https://novatech-studio.com" rel="noopener">Novatech Studio</a>
+  </footer>
+</body>
+</html>
