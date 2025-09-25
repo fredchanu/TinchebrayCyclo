@@ -113,33 +113,95 @@
   </section>
 
   <!-- FORMULAIRE -->
-  <section class="section white fade-in">
-    <div class="container">
-      <h2>Envoyer un message</h2>
-      <form name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact">
-        <div class="form-group">
-          <label for="nom">Nom</label>
-          <input type="text" name="nom" id="nom" required />
-        </div>
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" name="email" id="email" required />
-        </div>
-        <div class="form-group">
-          <label>
-            <input type="checkbox" required>
-            J’accepte que mes données soient utilisées pour me recontacter dans le cadre de cette demande.
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea name="message" id="message" rows="6" required></textarea>
-        </div>
-        <button type="submit" class="btn">Envoyer</button>
-      </form>
-    </div>
-  </section>
+<section class="section white fade-in">
+  <div class="container">
+    <h2>Envoyer un message</h2>
+
+    <form
+      name="contact"
+      id="contactForm"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/merci.html">
+
+    
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="loaded_at" id="loaded_at" value="" />
+
+      <p class="trap">
+        <label>Ne pas remplir si vous êtes humain :
+          <input name="bot-field" type="text" autocomplete="off" />
+        </label>
+      </p>
+
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" required />
+          J’accepte que mes données soient utilisées pour me recontacter dans le cadre de cette demande.
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="6" required></textarea>
+      </div>
+
+      <div data-netlify-recaptcha="true"></div>
+
+      <button type="submit" class="btn" id="submitBtn">Envoyer</button>
+      <p id="formMsg" class="info" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .trap { position:absolute !important; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .info { margin-top:.6rem; font-size:.9rem; opacity:.85; }
+</style>
+
+<script>
+  const MIN_SECONDS = 4;
+
+  const form = document.getElementById('contactForm');
+  const loadedAt = document.getElementById('loaded_at');
+  const msg = document.getElementById('formMsg');
+  const btn = document.getElementById('submitBtn');
+
+  // Timestamp au chargement
+  loadedAt.value = Date.now().toString();
+
+  form.addEventListener('submit', function (e) {
+    const honeypot = form.querySelector('input[name="bot-field"]');
+    if (honeypot && honeypot.value.trim() !== '') {
+      e.preventDefault();
+      msg.textContent = "Envoi bloqué (détection bot).";
+      return;
+    }
+
+    const elapsed = (Date.now() - parseInt(loadedAt.value || "0", 10)) / 1000;
+    if (elapsed < MIN_SECONDS) {
+      e.preventDefault();
+      msg.textContent = "Merci de patienter une seconde puis réessayer.";
+      setTimeout(() => { msg.textContent = ""; }, 2000);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Envoi…";
+  });
+</script>
+
 
 <footer class="site-footer">
   <div class="footer-grid">
