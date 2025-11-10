@@ -662,6 +662,87 @@ body.menu-open {
   line-height: 1.5;
   color: #ddd;
 }
+/* Grille des actus (page actualités) */
+.actus-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Grille d'accueil si nécessaire (3 cartes) */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Carte cliquable (anchor) */
+.news-card {
+  display: block;
+  background: #111;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s ease, box-shadow .25s ease;
+  height: 100%;
+}
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.28);
+}
+
+/* Image cadrée uniformément */
+.news-card img {
+  width: 100%;
+  height: 220px;           /* hauteur fixe */
+  object-fit: cover;       /* recadre sans déformer */
+  display: block;
+}
+
+/* Contenu */
+.news-content {
+  padding: 1.2rem 1.2rem 1.4rem;
+  display: grid;
+  gap: .55rem;
+}
+
+/* Titre + meta */
+.news-date {
+  font-size: .9rem;
+  color: #bdbdbd;
+}
+.news-title {
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: #f7c200;          /* jaune club */
+  margin: 0;
+}
+
+/* Résumé : 3 lignes max, ellipsis */
+.news-summary {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ddd;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* <= nombre de lignes visibles */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.5em * 3); /* réserve la place de 3 lignes */
+}
+
+/* Bouton "lire la suite" */
+.news-readmore {
+  margin-top: .4rem;
+  font-weight: 600;
+  color: #f7c200;
+  opacity: .9;
+}
+.news-card:hover .news-readmore {
+  text-decoration: underline;
+}
 
 
 @media(min-width: 768px) {
