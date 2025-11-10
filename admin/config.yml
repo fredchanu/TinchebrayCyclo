@@ -49,14 +49,21 @@ collections:
               - { label: "Type", name: "type", widget: "string" }
               - { label: "Tarif", name: "tarif", widget: "string" }
 
-  - name: "rando"
-    label: "Rando annuelle"
+  - name: "evenements"
+    label: "Événements"
     files:
-      - label: "Rando principale"
-        name: "rando"
-        file: "content/rando.json"
+      - file: "content/evenements.json"
+        label: "Liste des événements"
+        name: "evenements"
         fields:
-          - { label: "Nom", name: "nom", widget: "string" }
-          - { label: "Date", name: "date", widget: "datetime" }
-          - { label: "Flyer", name: "flyer", widget: "image", required: false }
-          - { label: "Description", name: "description", widget: "text" }
+          - label: "Événements"
+            name: "evenements"
+            widget: "list"
+            fields:
+              - { label: "Année", name: "annee", widget: "number" }
+              - { label: "Titre", name: "titre", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Lien d'inscription (HelloAsso...)", name: "lien", widget: "string", required: false }
+
