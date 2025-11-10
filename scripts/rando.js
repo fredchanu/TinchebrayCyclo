@@ -71,8 +71,8 @@ function afficherArchives(list) {
     <p>Retrouvez les photos des éditions passées sur notre page Facebook 👇</p>
     <div class="fb-post-wrapper" style="display:flex; justify-content:center; margin-top:1rem;">
       <iframe
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61566866396848&tabs=timeline&width=500&height=700"
-        width="500" height="700"
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61566866396848&tabs=timeline&width=500&height=400"
+        width="500" height="400"
         style="border:none;overflow:hidden;max-width:100%;"
         scrolling="no" frameborder="0" allowfullscreen="true"
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
