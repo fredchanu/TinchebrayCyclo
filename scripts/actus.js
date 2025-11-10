@@ -4,7 +4,7 @@
 
 async function chargerActus() {
   try {
-    const response = await fetch('/content/actus/');
+    const resIndex = await fetch('/content/actus/.meta/index.json');
     const text = await response.text();
 
     // Récupération des noms de fichiers (Netlify liste le contenu d'un dossier)
