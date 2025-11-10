@@ -22,7 +22,17 @@ collections:
               - { label: "Titre", name: "title", widget: "string" }
               - { label: "Date", name: "date", widget: "datetime" }
               - { label: "Texte", name: "text", widget: "text" }
-              - { label: "Image", name: "image", widget: "image", required: false }
+
+              # 👇 On remplace ici l'ancien champ unique par une liste d'images
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                field:
+                  label: "Image"
+                  name: "image"
+                  widget: "image"
+                  required: false
+
 
   - name: "tarifs"
     label: "Tarifs Licences"

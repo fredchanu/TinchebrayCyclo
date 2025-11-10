@@ -96,23 +96,70 @@
     <a href="actualites.html" class="back-btn">← Retour aux actualités</a>
   </div>
 
-  <script>
-    const actu = JSON.parse(localStorage.getItem('actu-detail') || '{}');
+<script>
+  const actu = JSON.parse(localStorage.getItem('actu-detail') || '{}');
 
-    if (!actu.title) {
-      document.querySelector('.container').innerHTML = `
-        <h2>Actualité introuvable 😕</h2>
-        <a href="actualites.html" class="back-btn">Retour</a>
-      `;
-    } else {
-      document.getElementById('actuTitle').textContent = actu.title;
-      document.getElementById('actuDate').textContent = new Date(actu.date)
-        .toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
-      document.getElementById('actuText').textContent = actu.text;
-      document.getElementById('actuImage').src = actu.image || 'assets/news-placeholder.jpg';
-      document.getElementById('actuImage').alt = actu.title;
+  if (!actu.title) {
+    document.querySelector('.container').innerHTML = `
+      <h2>Actualité introuvable 😕</h2>
+      <a href="actualites.html" class="back-btn">Retour</a>
+    `;
+  } else {
+    const container = document.querySelector('.container');
+
+    // === Construction du slider ===
+    const images = Array.isArray(actu.images)
+      ? actu.images
+      : (actu.image ? [actu.image] : []);
+
+    const galerie = images
+      .map(src => `<div class="slide"><img src="${src}" alt="${actu.title}"></div>`)
+      .join('');
+
+    container.innerHTML = `
+      <div class="slider">
+        <button class="nav prev">‹</button>
+        <div class="slides">${galerie}</div>
+        <button class="nav next">›</button>
+      </div>
+
+      <p class="actu-date">${new Date(actu.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })}</p>
+      <h1 class="actu-title">${actu.title}</h1>
+      <p class="actu-text">${actu.text}</p>
+      <a href="actualites.html" class="back-btn">← Retour aux actualités</a>
+    `;
+
+    // === Slider JS ===
+    const slides = document.querySelector('.slides');
+    const slideEls = slides.querySelectorAll('.slide');
+    let index = 0;
+
+    function updateSlider() {
+      slides.style.transform = `translateX(${-index * 100}%)`;
     }
-  </script>
+
+    document.querySelector('.prev').addEventListener('click', () => {
+      index = (index - 1 + slideEls.length) % slideEls.length;
+      updateSlider();
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+      index = (index + 1) % slideEls.length;
+      updateSlider();
+    });
+
+    // Défilement tactile mobile
+    let startX = 0;
+    slides.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    slides.addEventListener('touchend', e => {
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) index = (index + 1) % slideEls.length;
+      if (endX - startX > 50) index = (index - 1 + slideEls.length) % slideEls.length;
+      updateSlider();
+    });
+  }
+</script>
+
 
 </body>
 </html>

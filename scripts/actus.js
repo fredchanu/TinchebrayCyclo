@@ -3,14 +3,17 @@ console.log("✅ Script actus.js chargé !");
 // === Chargement des actualités ===
 async function chargerActus() {
   try {
+    // on évite le cache
     const res = await fetch('/content/actus.json', { cache: "no-store" });
     const data = await res.json();
+
+    // lecture du bon tableau
     const actus = data.actus || [];
 
     // tri par date décroissante
     actus.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // stock pour la page détail
+    // 💾 sauvegarde pour la page de détail
     localStorage.setItem('actus', JSON.stringify(actus));
 
     afficherActus(actus);
@@ -21,44 +24,50 @@ async function chargerActus() {
 
 // === Affichage des actus ===
 function afficherActus(actus) {
-  const containerAccueil = document.querySelector('.news-grid');   // Accueil (3)
-  const containerPage    = document.querySelector('.actus-list');  // Page Actualités (toutes)
+  const containerAccueil = document.querySelector('.news-grid');
+  const containerPage = document.querySelector('.actus-list');
 
+  // Section accueil (3 plus récentes)
   if (containerAccueil) {
     const recentes = actus.slice(0, 3);
-    containerAccueil.innerHTML = recentes
-      .map(a => creerCarteActu(a))
-      .join('');
+    containerAccueil.innerHTML = recentes.map(a => creerCarteActu(a)).join('');
   }
 
+  // Page actualités (toutes)
   if (containerPage) {
-    containerPage.innerHTML = actus
-      .map(a => creerCarteActu(a, true))
-      .join('');
+    containerPage.innerHTML = actus.map(a => creerCarteActu(a, true)).join('');
   }
 
-  // Forcer visible si un CSS "fade-in" bloque
+  // 🔧 Force affichage immédiat (évite les fades bloqués)
   document.querySelectorAll('.fade-in').forEach(el => {
     el.style.opacity = 1;
     el.style.transform = 'none';
   });
 }
 
-// === Carte d’actu (anchor cliquable + data-title) ===
+// === Création d'une carte actu ===
 function creerCarteActu(a, complet = false) {
   const date = new Date(a.date).toLocaleDateString('fr-FR', {
-    day: '2-digit', month: 'long', year: 'numeric'
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
   });
 
-  // on tronque côté rendu (3 lignes contrôlées au CSS)
-  const texte = a.text || "";
+  // Texte résumé ou complet
+  const texte = complet
+    ? a.text
+    : (a.text.length > 120 ? a.text.slice(0, 120) + '...' : a.text);
 
-  // on encode le titre pour le passer en data-*
+  // Gestion multi-images
+  const images = Array.isArray(a.images) ? a.images : (a.image ? [a.image] : []);
+  const imagePrincipale = images[0] || '';
+
+  // Encodage du titre pour l'attribut data-title
   const dataTitle = encodeURIComponent(a.title || "");
 
   return `
     <a class="news-card fade-in" href="actu-detail.html" data-title="${dataTitle}">
-      ${a.image ? `<img src="${a.image}" alt="${a.title}">` : ''}
+      ${imagePrincipale ? `<img src="${imagePrincipale}" alt="${a.title}">` : ''}
       <div class="news-content">
         <p class="news-date">${date}</p>
         <h3 class="news-title">${a.title}</h3>
@@ -69,7 +78,10 @@ function creerCarteActu(a, complet = false) {
   `;
 }
 
-// === Interception du clic pour pousser la bonne actu dans localStorage ===
+// === Lancement ===
+document.addEventListener('DOMContentLoaded', chargerActus);
+
+// === Gestion du clic sur une carte ===
 document.addEventListener('click', (e) => {
   const link = e.target.closest('a.news-card[href]');
   if (!link) return;
@@ -81,9 +93,6 @@ document.addEventListener('click', (e) => {
 
   if (actu) {
     localStorage.setItem('actu-detail', JSON.stringify(actu));
-    // on laisse la navigation <a href="actu-detail.html"> se faire
+    // On laisse le lien faire sa navigation normale vers actu-detail.html
   }
 });
-
-// Lancement
-document.addEventListener('DOMContentLoaded', chargerActus);
