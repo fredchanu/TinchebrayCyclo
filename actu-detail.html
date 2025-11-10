@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualité – Tinchebray Cyclo</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #f1f1f1;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      padding: 1rem 2rem;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header a {
+      color: #f7c200;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 0 1rem;
+    }
+
+    .actu-image {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .actu-date {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-bottom: 0.5rem;
+    }
+
+    .actu-title {
+      font-size: 2rem;
+      color: #f7c200;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .actu-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #ddd;
+      white-space: pre-line;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.6rem;
+      background: #f7c200;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #fff000;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html">← Retour à l'accueil</a>
+    <a href="actualites.html">Toutes les actualités</a>
+  </header>
+
+  <div class="container">
+    <img id="actuImage" class="actu-image" alt="Image de l'actualité">
+    <p id="actuDate" class="actu-date"></p>
+    <h1 id="actuTitle" class="actu-title"></h1>
+    <p id="actuText" class="actu-text"></p>
+    <a href="actualites.html" class="back-btn">← Retour aux actualités</a>
+  </div>
+
+  <script>
+    const actu = JSON.parse(localStorage.getItem('actu-detail') || '{}');
+
+    if (!actu.title) {
+      document.querySelector('.container').innerHTML = `
+        <h2>Actualité introuvable 😕</h2>
+        <a href="actualites.html" class="back-btn">Retour</a>
+      `;
+    } else {
+      document.getElementById('actuTitle').textContent = actu.title;
+      document.getElementById('actuDate').textContent = new Date(actu.date)
+        .toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+      document.getElementById('actuText').textContent = actu.text;
+      document.getElementById('actuImage').src = actu.image || 'assets/news-placeholder.jpg';
+      document.getElementById('actuImage').alt = actu.title;
+    }
+  </script>
+
+</body>
+</html>
