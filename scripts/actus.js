@@ -1,3 +1,5 @@
+console.log("✅ Script actus.js chargé !");
+
 async function chargerActus() {
   try {
     const res = await fetch('/content/actus.json');
