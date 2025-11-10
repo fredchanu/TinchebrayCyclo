@@ -1037,6 +1037,37 @@ body.menu-open {
   position: relative;
   z-index: 2;
 }
+.events-archives {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.archive-card {
+  background: #111;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+  color: #eee;
+}
+.archive-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.archive-body {
+  padding: 1rem;
+}
+.archive-body h3 {
+  color: #f7c200;
+  margin-bottom: .3rem;
+}
+.archive-date {
+  font-size: .9rem;
+  color: #bbb;
+  margin-top: .5rem;
+}
+
 /* pageContact */
 .page-contact h2 {
   position: relative;
