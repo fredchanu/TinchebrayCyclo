@@ -1,36 +1,59 @@
 console.log("✅ Script actus.js chargé !");
 
+// === Chargement des actualités ===
 async function chargerActus() {
   try {
+    // on évite le cache
     const res = await fetch('/content/actus.json', { cache: "no-store" });
     const data = await res.json();
+
+    // lecture du bon tableau
     const actus = data.actus || [];
 
-
-    // Tri par date
+    // tri par date décroissante
     actus.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     afficherActus(actus);
   } catch (err) {
-    console.error('Erreur chargement actus :', err);
+    console.error('❌ Erreur chargement actus :', err);
   }
 }
 
+// === Affichage des actus ===
 function afficherActus(actus) {
-  const isAccueil = document.querySelector('.news-grid');
+  const containerAccueil = document.querySelector('.news-grid');
   const containerPage = document.querySelector('.actus-list');
 
-  if (isAccueil) {
+  // section accueil (3 plus récentes)
+  if (containerAccueil) {
     const recentes = actus.slice(0, 3);
-    isAccueil.innerHTML = recentes.map(a => creerCarteActu(a)).join('');
+    containerAccueil.innerHTML = recentes.map(a => creerCarteActu(a)).join('');
   }
+
+  // page actualités (toutes)
   if (containerPage) {
     containerPage.innerHTML = actus.map(a => creerCarteActu(a, true)).join('');
   }
+
+  // 🔧 Force l'affichage immédiat (bypass fade-in caché)
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.style.opacity = 1;
+    el.style.transform = 'none';
+  });
 }
 
+// === Modèle d'une carte actu ===
 function creerCarteActu(a, complet = false) {
-  const date = new Date(a.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
-  const texte = complet ? a.text : (a.text.length > 120 ? a.text.slice(0, 120) + '...' : a.text);
+  const date = new Date(a.date).toLocaleDateString('fr-FR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  const texte = complet
+    ? a.text
+    : (a.text.length > 120 ? a.text.slice(0, 120) + '...' : a.text);
+
   return `
     <div class="news-card fade-in">
       ${a.image ? `<img src="${a.image}" alt="${a.title}">` : ''}
@@ -39,7 +62,9 @@ function creerCarteActu(a, complet = false) {
         <h3 class="news-title">${a.title}</h3>
         <p class="news-summary">${texte}</p>
       </div>
-    </div>`;
+    </div>
+  `;
 }
 
+// === Lancement ===
 document.addEventListener('DOMContentLoaded', chargerActus);
