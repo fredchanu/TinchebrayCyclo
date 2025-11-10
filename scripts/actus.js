@@ -2,9 +2,10 @@ console.log("✅ Script actus.js chargé !");
 
 async function chargerActus() {
   try {
-    const res = await fetch('/content/actus.json');
+    const res = await fetch('/content/actus.json', { cache: "no-store" });
     const data = await res.json();
-    const actus = data.actus || data; // compatibilité
+    const actus = data.actus || [];
+
 
     // Tri par date
     actus.sort((a, b) => new Date(b.date) - new Date(a.date));
