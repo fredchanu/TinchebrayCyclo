@@ -102,8 +102,15 @@
   width: 100%;
   height: 450px;
   object-fit: cover;
-  display: block;
 }
+
+@media (max-width: 768px) {
+  .slide img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
 
 /* Flèches navigation */
 .nav {
