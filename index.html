@@ -88,30 +88,41 @@
   </div>
 </section>
 
-<section class="section-events ">
+<section class="section-events home-event">
   <div class="container">
     <h2 class="section-title">Prochains événements</h2>
 
     <div class="event-card slide-right" data-delay="0.3s">
       <div class="event-image">
-        <img src="assets/affiche.png" alt="Flyer randonnée VTT">
+        <!-- 👇 classe repère pour l’image -->
+        <img class="home-event-image" src="assets/affiche.png" alt="Flyer randonnée VTT">
       </div>
+
       <div class="event-content">
-        <p class="event-date">Dimanche 28 septembre 2025</p>
-        <h3 class="event-title">Randonnée VTT & Cyclo</h3>
-        <p class="event-description">
+        <!-- 👇 classes repères pour injection -->
+        <p class="home-event-date event-date">Dimanche 28 septembre 2025</p>
+        <h3 class="home-event-title event-title">Randonnée VTT & Cyclo</h3>
+        <p class="home-event-desc event-description">
           Trois parcours VTT de 21, 32 et 46 km, et deux parcours cyclo de 50 et 70 km. Ambiance conviviale et ravitos au top !
         </p>
+
         <div class="cta-buttons">
-        <a href="https://www.helloasso.com/associations/tinchebray-cyclo/evenements/la-tinch-bike" target="_blank" rel="noopener noreferrer"
-         class="cta">S'inscrire</a>
-        <a href="evenements.html"  rel="noopener noreferrer"
-         class="cta">En savoir plus</a>
-         </div>
+          <!-- 👇 repères pour le script -->
+          <a href="https://www.helloasso.com/associations/tinchebray-cyclo/evenements/la-tinch-bike"
+             target="_blank" rel="noopener noreferrer"
+             class="cta home-event-cta">S'inscrire</a>
+
+          <a href="evenements.html" rel="noopener noreferrer"
+             class="cta home-event-more">En savoir plus</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- juste avant </body> -->
+<script src="scripts/evenements.js" defer></script>
+
 
 
 <section class="section-news">
