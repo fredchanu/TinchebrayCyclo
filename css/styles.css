@@ -609,41 +609,60 @@ body.menu-open {
   z-index: 2;
 }
 
-/* ARTICLES COMPLETS */
-.news-item {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+/* Grille principale des actus */
+.actus-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
-.news-item img {
+/* Carte */
+.news-card {
+  background: #111;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+/* Image */
+.news-card img {
   width: 100%;
-  max-height: 300px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 8px;
 }
 
-.news-meta {
-  font-size: 0.9rem;
-  color: #777;
-  margin-bottom: 0.5rem;
+/* Contenu */
+.news-content {
+  padding: 1.5rem;
+  color: #eee;
 }
 
 .news-title {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  color: #f7c200; /* ton jaune club */
+  margin-bottom: 0.5rem;
 }
 
-.news-text {
-  font-size: 1rem;
-  line-height: 1.6;
+.news-date {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-bottom: 0.5rem;
 }
+
+.news-summary {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ddd;
+}
+
 
 @media(min-width: 768px) {
   .news-item {
