@@ -13,6 +13,9 @@ async function chargerActus() {
     // tri par date décroissante
     actus.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // 💾 sauvegarde pour la page de détail
+    localStorage.setItem('actus', JSON.stringify(actus));
+
     afficherActus(actus);
   } catch (err) {
     console.error('❌ Erreur chargement actus :', err);
@@ -75,8 +78,8 @@ document.addEventListener('click', (e) => {
   if (!card) return;
 
   const title = card.querySelector('.news-title').textContent;
-  const actu = JSON.parse(localStorage.getItem('actus') || '[]')
-    .find(a => a.title === title);
+  const actus = JSON.parse(localStorage.getItem('actus') || '[]');
+  const actu = actus.find(a => a.title === title);
 
   if (actu) {
     localStorage.setItem('actu-detail', JSON.stringify(actu));
