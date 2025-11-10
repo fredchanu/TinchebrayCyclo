@@ -68,3 +68,18 @@ function creerCarteActu(a, complet = false) {
 
 // === Lancement ===
 document.addEventListener('DOMContentLoaded', chargerActus);
+
+// === Affichage complet au clic ===
+document.addEventListener('click', (e) => {
+  const card = e.target.closest('.news-card');
+  if (!card) return;
+
+  const title = card.querySelector('.news-title').textContent;
+  const actu = JSON.parse(localStorage.getItem('actus') || '[]')
+    .find(a => a.title === title);
+
+  if (actu) {
+    localStorage.setItem('actu-detail', JSON.stringify(actu));
+    window.location.href = 'actu-detail.html';
+  }
+});
