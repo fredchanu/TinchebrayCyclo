@@ -66,23 +66,33 @@ function afficherArchives(list) {
   const cont = document.getElementById('archives-container');
   if (!cont || !list.length) return;
 
-  const html = `
-    <div class="events-archives">
+  const dernierPasse = list
+    .slice()
+    .sort((a,b) => new Date(b.date) - new Date(a.date))[0];
+
+  const fb = dernierPasse?.facebook_link;
+
+  cont.innerHTML = `
+    <h2>Éditions précédentes</h2>
+    <p>Retrouvez les affiches et les photos des randonnées passées 👇</p>
+
+    <div class="archives-grid">
       ${list.map(ev => `
         <div class="archive-card">
-          ${ev.image ? `<img src="${ev.image}" alt="${ev.titre}">` : ''}
-          <div class="archive-body">
-            <h3>${ev.titre}</h3>
-            <p>${ev.description || ''}</p>
-            <p class="archive-date">${new Date(ev.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })}</p>
+          <div class="archive-image">
+            ${ev.image ? `<img src="${ev.image}" alt="${ev.titre}">` : ''}
+            <div class="archive-overlay">
+              <h3>${ev.titre}</h3>
+              <p>${new Date(ev.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })}</p>
+              ${ev.facebook_link ? `<a href="${ev.facebook_link}" target="_blank" class="archive-btn">Voir les photos</a>` : ''}
+            </div>
           </div>
         </div>
       `).join('')}
     </div>
   `;
-
-  cont.innerHTML = html;
 }
+
 
 
 document.addEventListener('DOMContentLoaded', chargerRando);
