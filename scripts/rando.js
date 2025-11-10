@@ -64,35 +64,41 @@ function afficherRando(e) {
 // --- ARCHIVES (anciennes randos + lien Facebook) ---
 function afficherArchives(list) {
   const cont = document.getElementById('archives-container');
-  if (!cont || !list.length) return;
+  if (!cont) return;
 
   const dernierPasse = list
     .slice()
     .sort((a,b) => new Date(b.date) - new Date(a.date))[0];
-
-  const fb = dernierPasse?.facebook_link;
+  
+  // Si un lien spécifique existe pour la dernière rando, on l’utilise
+  const fb = dernierPasse?.facebook_link || "https://www.facebook.com/profile.php?id=61566866396848";
 
   cont.innerHTML = `
-    <h2>Éditions précédentes</h2>
-    <p>Retrouvez les affiches et les photos des randonnées passées 👇</p>
+    <h2>Retour en images</h2>
+    <p>Revivez la dernière édition de la Tinch'Bike en photos 👇</p>
 
-    <div class="archives-grid">
-      ${list.map(ev => `
-        <div class="archive-card">
-          <div class="archive-image">
-            ${ev.image ? `<img src="${ev.image}" alt="${ev.titre}">` : ''}
-            <div class="archive-overlay">
-              <h3>${ev.titre}</h3>
-              <p>${new Date(ev.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })}</p>
-              ${ev.facebook_link ? `<a href="${ev.facebook_link}" target="_blank" class="archive-btn">Voir les photos</a>` : ''}
-            </div>
-          </div>
-        </div>
-      `).join('')}
+    <div class="fb-post-wrapper" style="display:flex; justify-content:center; margin-top:1rem;">
+      <iframe
+        src="https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(fb)}&show_text=true&width=500"
+        width="500"
+        height="760"
+        style="border:none;overflow:hidden;max-width:100%;"
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+      </iframe>
     </div>
+
+    <p style="text-align:center; margin-top:1.5rem; font-size:1rem;">
+      📸 Retrouvez toutes nos publications sur
+      <a href="https://www.facebook.com/profile.php?id=61566866396848"
+         target="_blank" rel="noopener noreferrer"
+         style="color:#f7c200; font-weight:600; text-decoration:none;">
+         la page Facebook Tinchebray Cyclo
+      </a>.
+    </p>
   `;
 }
-
-
 
 document.addEventListener('DOMContentLoaded', chargerRando);
