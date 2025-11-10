@@ -379,6 +379,26 @@ body.menu-open {
 }
 
 /* ACTUALITÉS */
+.see-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.see-more .cta {
+  display: inline-block;
+  background: #f7c200;
+  color: #000;
+  padding: 0.8rem 1.6rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.see-more .cta:hover {
+  background: #ffe65c;
+  transform: translateY(-2px);
+}
 
 .section-news {
   background-color: #F5F3EA;
