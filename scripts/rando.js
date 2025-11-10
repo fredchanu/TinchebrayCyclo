@@ -1,6 +1,6 @@
 console.log("✅ rando.js chargé");
 
-// --- Outil date ---
+// --- Utilitaires ---
 const parseISO = s => new Date(s);
 const isFutureOrToday = d => {
   const t = new Date(); t.setHours(0,0,0,0);
@@ -8,7 +8,7 @@ const isFutureOrToday = d => {
   return dt >= t;
 };
 
-// --- Charger et afficher ---
+// --- Chargement ---
 async function chargerRando() {
   try {
     const res = await fetch('/content/evenements.json', { cache: 'no-store' });
@@ -26,21 +26,22 @@ async function chargerRando() {
   }
 }
 
-// --- Afficher la rando courante ---
+// --- Rando courante ---
 function afficherRando(e) {
   if (!e) return;
 
-  // Hero
+  // HERO
   const h1 = document.querySelector('.hero-content h1');
   const heroP = document.querySelector('.hero-content p');
-  if (h1) h1.textContent = e.titre;
+  if (h1) h1.textContent = e.titre || "Randonnée";
   if (heroP) heroP.textContent = `Rejoignez-nous à Tinchebray le ${new Date(e.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })} pour un moment sportif et convivial !`;
 
-  // Infos pratiques
-  const infos = document.querySelector('.section.green .container');
+  // INFOS PRATIQUES
+  const infos = document.getElementById('infos-rando');
   if (infos) {
     infos.innerHTML = `
-      <h2>Infos pratiques</h2>
+      <h2>${e.titre}</h2>
+      <p>${e.description || ''}</p>
       <p><strong>📅 Date :</strong> ${new Date(e.date).toLocaleDateString('fr-FR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' })}</p>
       <p><strong>📍 Lieu :</strong> Départ depuis le champ de foire de Tinchebray</p>
       <p><strong>🕘 Horaires :</strong> Accueil à partir de 7h30, départs libres jusqu’à 9h30</p>
@@ -52,20 +53,32 @@ function afficherRando(e) {
     `;
   }
 
-  // Flyer
+  // FLYER
   const flyer = document.querySelector('.flyer-img');
-  if (flyer && e.image) flyer.src = e.image;
-  if (flyer) flyer.alt = `Flyer ${e.titre}`;
+  if (flyer && e.image) {
+    flyer.src = e.image;
+    flyer.alt = `Flyer ${e.titre}`;
+  }
 }
 
-// --- Afficher les randos passées ---
+// --- ARCHIVES (anciennes randos + lien Facebook) ---
 function afficherArchives(list) {
-  const cont = document.querySelector('.section.green.arc-top .container');
-  if (!cont) return;
-  if (!list.length) return;
+  const cont = document.getElementById('archives-container');
+  if (!cont || !list.length) return;
 
   const html = `
     <h2>Éditions précédentes</h2>
+    <p>Retrouvez les photos des éditions passées sur notre page Facebook 👇</p>
+    <div class="fb-post-wrapper" style="display:flex; justify-content:center; margin-top:1rem;">
+      <iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61566866396848&tabs=timeline&width=500&height=700"
+        width="500" height="700"
+        style="border:none;overflow:hidden;max-width:100%;"
+        scrolling="no" frameborder="0" allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+      </iframe>
+    </div>
+
     <div class="events-archives">
       ${list.map(ev => `
         <div class="archive-card">
@@ -79,8 +92,7 @@ function afficherArchives(list) {
       `).join('')}
     </div>
   `;
-  cont.innerHTML += html;
+  cont.innerHTML = html;
 }
 
-// --- Lancer ---
 document.addEventListener('DOMContentLoaded', chargerRando);
