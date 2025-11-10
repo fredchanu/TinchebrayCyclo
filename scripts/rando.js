@@ -67,22 +67,6 @@ function afficherArchives(list) {
   if (!cont || !list.length) return;
 
   const html = `
-    <h2>Retour en images</h2>
-    <p>Revivez la dernière édition de la Tinch'Bike en photos 👇</p>
-
-    <div class="fb-post-wrapper" style="display:flex; justify-content:center; margin-top:1rem;">
-      <iframe 
-        src="https://www.facebook.com/plugins/post.php?href=${encodeURIComponent('https://www.facebook.com/share/p/1DLAt4dEfi/?mibextid=wwXIfr')}&show_text=true&width=500"
-        width="500"
-        height="760"
-        style="border:none;overflow:hidden;max-width:100%;"
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-      </iframe>
-    </div>
-
     <div class="events-archives">
       ${list.map(ev => `
         <div class="archive-card">
