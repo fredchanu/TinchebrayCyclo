@@ -10,17 +10,15 @@ locale: "fr"
 collections:
   - name: "actus"
     label: "Actualités"
-    label_singular: "Actu"
-    folder: "content/actus"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}"
-    extension: "json"
-    format: "json"
+    file: "content/actus.json"
     fields:
-      - { label: "Titre", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Image", name: "image", widget: "image", required: false }
-      - { label: "Texte", name: "text", widget: "text" }
+      - { label: "Liste des actualités", name: "actus", widget: "list", fields: [
+          { label: "Titre", name: "title", widget: "string" },
+          { label: "Date", name: "date", widget: "datetime" },
+          { label: "Texte", name: "text", widget: "text" },
+          { label: "Image", name: "image", widget: "image", required: false }
+        ]}
+
 
   - name: "tarifs"
     label: "Tarifs Licences"
