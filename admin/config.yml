@@ -5,20 +5,22 @@ backend:
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
-locale: "fr"
-
 collections:
   - name: "actus"
     label: "Actualités"
-    file: "content/actus.json"
-    fields:
-      - { label: "Liste des actualités", name: "actus", widget: "list", fields: [
-          { label: "Titre", name: "title", widget: "string" },
-          { label: "Date", name: "date", widget: "datetime" },
-          { label: "Texte", name: "text", widget: "text" },
-          { label: "Image", name: "image", widget: "image", required: false }
-        ]}
-
+    files:
+      - file: "content/actus.json"
+        label: "Liste des actualités"
+        name: "actus"
+        fields:
+          - label: "Actualités"
+            name: "actus"
+            widget: "list"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime" }
+              - { label: "Texte", name: "text", widget: "text" }
+              - { label: "Image", name: "image", widget: "image", required: false }
 
   - name: "tarifs"
     label: "Tarifs Licences"
