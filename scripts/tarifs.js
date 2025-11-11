@@ -1,11 +1,14 @@
-// scripts/tarifs.js
 fetch('content/tarifs.json')
   .then(response => response.json())
   .then(data => {
     const container = document.querySelector('.benefits');
-    const licence = data.licence[0]; // première entrée (ex: licence adulte)
-    const tarifItem = document.createElement('li');
-    tarifItem.innerHTML = `<strong>📢 Licence ${data.annee} :</strong> Seulement <strong>${licence.prix}€</strong> grâce au soutien du club`;
-    container.appendChild(tarifItem);
+    if (!container || !data.licences || data.licences.length === 0) return;
+
+    const annee = data.annee || "en cours";
+    data.licences.forEach(licence => {
+      const item = document.createElement('li');
+      item.innerHTML = `<strong>📢 Licence ${annee} :</strong> ${licence.type} – <strong>${licence.tarif}</strong>`;
+      container.appendChild(item);
+    });
   })
   .catch(err => console.error('Erreur de chargement des tarifs :', err));
