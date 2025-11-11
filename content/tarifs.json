@@ -1,7 +1,17 @@
 {
   "annee": "2025",
   "licences": [
-    { "type": "Adulte", "tarif": "40€" },
-    { "type": "Jeune", "tarif": "16€" }
+    {
+      "type": "Adulte",
+      "tarif": "40€"
+    },
+    {
+      "type": "Jeune",
+      "tarif": "16€"
+    },
+    {
+      "type": "Couple ",
+      "tarif": "70€"
+    }
   ]
 }
