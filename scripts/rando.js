@@ -47,7 +47,7 @@ function afficherRando(e) {
       <p><strong>🕘 Horaires :</strong> Accueil et départ de 7h30 à 9h30</p>
       <p><strong>🥪 Ravitaillements :</strong> Oui, sur les parcours</p>
       <p><strong>💰 Tarifs :</strong> 5€ licenciés / 8€ non-licenciés / gratuit licenciés -18 ans, 2€ non-licenciés</p>
-      <p><strong>🚲 Lavage vélo</strong> Un point nettoyage vélo sera mis à disposition</p>
+      <p><strong>🚲 Lavage vélo :</strong> Un point nettoyage vélo sera mis à disposition</p>
       <p><strong>📋 Inscriptions :</strong> Sur place le jour même ou en ligne via le lien ci-dessous</p>
       <div class="cta-center" style="margin-top:2rem;">
         ${e.lien ? `<a href="${e.lien}" target="_blank" rel="noopener noreferrer" class="cta">Je participe</a>` : `<p>Les inscriptions ouvriront bientôt.</p>`}
