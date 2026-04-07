@@ -34,7 +34,7 @@ function afficherRando(e) {
   const h1 = document.querySelector('.hero-content h1');
   const heroP = document.querySelector('.hero-content p');
   if (h1) h1.textContent = e.titre || "Randonnée";
-  if (heroP) heroP.textContent = `Rejoignez-nous à Tinchebray le ${new Date(e.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })} pour un moment sportif et convivial !`;
+  if (heroP) heroP.textContent = `Rejoignez-nous à Saint Cornier des Landes le ${new Date(e.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })} pour un moment sportif et convivial !`;
 
   // INFOS PRATIQUES
   const infos = document.getElementById('infos-rando');
@@ -43,10 +43,10 @@ function afficherRando(e) {
       <h2>${e.titre}</h2>
       <p>${e.description || ''}</p>
       <p><strong>📅 Date :</strong> ${new Date(e.date).toLocaleDateString('fr-FR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' })}</p>
-      <p><strong>📍 Lieu :</strong> Départ depuis le champ de foire de Tinchebray</p>
-      <p><strong>🕘 Horaires :</strong> Accueil à partir de 7h30, départs libres jusqu’à 9h30</p>
+      <p><strong>📍 Lieu :</strong> Départ depuis le Bourg de Saint Cornier des Landes</p>
+      <p><strong>🕘 Horaires :</strong> Accueil et départ de 7h30à 9h30</p>
       <p><strong>🥪 Ravitaillements :</strong> Oui, sur les parcours</p>
-      <p><strong>💰 Tarifs :</strong> 5€ licenciés / 8€ non-licenciés / gratuit -12 ans</p>
+      <p><strong>💰 Tarifs :</strong> 5€ licenciés / 8€ non-licenciés / gratuit licenciés -18 ans, 2€ non-licenciés</p>
       <div class="cta-center" style="margin-top:2rem;">
         ${e.lien ? `<a href="${e.lien}" target="_blank" rel="noopener noreferrer" class="cta">Je participe</a>` : `<p>Les inscriptions ouvriront bientôt.</p>`}
       </div>
