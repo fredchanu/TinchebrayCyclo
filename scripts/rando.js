@@ -41,12 +41,13 @@ function afficherRando(e) {
   if (infos) {
     infos.innerHTML = `
       <h2>${e.titre}</h2>
-      <p>${e.description || ''}</p>
+
       <p><strong>📅 Date :</strong> ${new Date(e.date).toLocaleDateString('fr-FR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' })}</p>
       <p><strong>📍 Lieu :</strong> Départ depuis le Bourg de Saint Cornier des Landes</p>
-      <p><strong>🕘 Horaires :</strong> Accueil et départ de 7h30à 9h30</p>
+      <p><strong>🕘 Horaires :</strong> Accueil et départ de 7h30 à 9h30</p>
       <p><strong>🥪 Ravitaillements :</strong> Oui, sur les parcours</p>
       <p><strong>💰 Tarifs :</strong> 5€ licenciés / 8€ non-licenciés / gratuit licenciés -18 ans, 2€ non-licenciés</p>
+      <p><strong>🚲 Nettoyage vélo :</strong></p>
       <div class="cta-center" style="margin-top:2rem;">
         ${e.lien ? `<a href="${e.lien}" target="_blank" rel="noopener noreferrer" class="cta">Je participe</a>` : `<p>Les inscriptions ouvriront bientôt.</p>`}
       </div>
